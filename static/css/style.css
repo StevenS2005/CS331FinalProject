@@ -27,3 +27,11 @@ nav {
     padding: 8px 20px;
     border-radius: 20px;
 }
+
+.banner {
+    height: 60vh; 
+    /*background-image: url('/static/images/home_Car_Pic.jpg');*/
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
