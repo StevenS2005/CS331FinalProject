@@ -1,14 +1,24 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     background-color: #1a2035; 
     color: white;
     font-family: sans-serif;
 }
 
-nav {
+nav {  
+    position: absolute;
+    top: 0;
+    width: 100%;    
     display: flex;
     justify-content: space-between;
     padding: 20px 50px;
     align-items: center;
+    background-color: transparent;
 }
 .nav-links a {
     color: white;
@@ -29,9 +39,11 @@ nav {
 }
 
 .banner {
-    height: 60vh; 
-    /*background-image: url('/static/images/home_Car_Pic.jpg');*/
-    background-size: contain;
+    height: 85vh;
+    background-image: 
+    linear-gradient(to bottom, rgba(0,0,0,0.6), rgba(0,0,0,0)),
+    url('/static/images/damien-creatz-navtPflashE-unsplash.jpg');
+    background-size: cover;
     background-repeat: no-repeat;
     background-position: center;
 }
