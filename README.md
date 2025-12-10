@@ -21,7 +21,7 @@ Group Memebers: Marc Mullaly, Sergio Tapia, Steven Santos
 These are the videos I used to help me get started
 
 - https://www.youtube.com/watch?v=vlvXz1KDtB8&t=43s
--https://www.youtube.com/watch?v=o3bCVqF9gI0
+- https://www.youtube.com/watch?v=o3bCVqF9gI0
 
 ### How to Use:
 - go to the app.py file and run the file
