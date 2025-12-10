@@ -45,7 +45,7 @@ use this to test the admin's view
 
 - Car Inventory Search
 
-- Car Reservation System
+- Car Car Rental Booking System
 
 - Admin User list
 
