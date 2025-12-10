@@ -86,7 +86,7 @@ def AdminLogin():
               
             return redirect(url_for('AdminDashboard'))
         else:
-            error = "Invalid Email or Password. Please try again or Register."
+            error = "Invalid Email or Password For Admin"
             return render_template('adminLogin.html', error=error)
 
     return render_template('adminLogin.html')
@@ -132,6 +132,50 @@ def AdminDashboard():
         return render_template('adminDashboard.html')
     else:
         return redirect(url_for('AdminLogin'))
+
+@app.route('/admin/users')
+def AdminUsers():
+    role = session.get('role')
+
+    if 'logged_in' in session and role and role.lower() == 'admin':        
+        con = mysql.connect()
+        cur = con.cursor()
+        
+        cur.execute("SELECT * FROM `customer`")
+        data = cur.fetchall() 
+        
+        cur.close()
+        con.close()
+        
+
+        users_list = []
+        for row in data:
+            user_dict = {
+                'customerID': row[0],
+                'firstName': row[1],
+                'lastName': row[2],
+                'dob': row[3],
+                'phoneNum': row[4],
+                'email': row[5],
+                'password': row[6],
+                'address': row[7],
+                'city': row[8],
+                'state': row[9],
+                'zipcode': row[10]
+                }
+            
+            users_list.append(user_dict)
+
+        return render_template('adminUsers.html', users=users_list)
+    else:
+        return redirect(url_for('AdminLogin'))
+
+@app.route('/logout')
+def Logout():
+    session.clear()
+    
+    return redirect(url_for('Index'))
+
 
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode
