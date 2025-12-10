@@ -38,7 +38,7 @@ def Login():
         con.close()
 
         if data:
-            session['logged_in'] = True
+            session['Clogged_in'] = True
             session['customerID']= data[0]
             session['firstName']= data[1]
             session['lastName']= data[2]
@@ -75,7 +75,7 @@ def AdminLogin():
         con.close()
 
         if data:
-            session['logged_in'] = True
+            session['Alogged_in'] = True
             session['employeeID']= data[0]
             session['firstName']= data[1]
             session['lastName']= data[2]
@@ -121,14 +121,14 @@ def Register():
 
 @app.route('/dashboard', methods=['GET', 'POST'])
 def Dashboard():
-    if 'logged_in' in session:
+    if 'Clogged_in' in session:
         return render_template('dashboard.html')
     else:
         return redirect(url_for('Login'))
 
 @app.route('/adminDashboard', methods=['GET', 'POST'])
 def AdminDashboard():
-    if 'logged_in' in session:
+    if 'Alogged_in' in session:
         return render_template('adminDashboard.html')
     else:
         return redirect(url_for('AdminLogin'))
@@ -137,7 +137,7 @@ def AdminDashboard():
 def AdminUsers():
     role = session.get('role')
 
-    if 'logged_in' in session and role and role.lower() == 'admin':        
+    if 'Alogged_in' in session and role and role.lower() == 'admin':        
         con = mysql.connect()
         cur = con.cursor()
         
@@ -176,6 +176,35 @@ def Logout():
     
     return redirect(url_for('Index'))
 
+@app.route('/cars')
+def AvailableCars():
+    if 'Clogged_in' in session:
+        
+        con = mysql.connect()
+        cur = con.cursor()
+        
+        cur.execute("SELECT * FROM `car` WHERE `RentalStatus` = 'available'")
+        raw_data = cur.fetchall()
+        cur.close()
+        con.close()
+        
+        cars_list = []
+        for row in raw_data:
+            car_dict = {
+                'carID': row[0],
+                'plate': row[1],
+                'model': row[2],
+                'brand': row[3],
+                'category': row[4],
+                'year': row[5],
+                'status': row[6],
+            }
+
+            cars_list.append(car_dict)
+            
+        return render_template('cars.html', cars=cars_list)
+    else:
+        return redirect(url_for('Login'))
 
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode

@@ -175,3 +175,50 @@ footer {
     padding: 8px 20px;
     border-radius: 20px; 
 }
+
+
+.car-grid {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    justify-content: left;
+    margin-top: 30px;
+}
+
+.car-card {
+    background-color: rgb(184, 139, 28);
+    border-radius: 10px;
+    width: 300px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.car-image-box {
+    height: 150px;
+    background-color: #242f46;
+    display: flex;
+    justify-content: center;    
+    align-items: center;
+    color: white;
+}
+
+.car-info {
+    padding: 20px;
+    color: white;
+    text-align: center;
+}
+
+.status {
+    color: #4cd137; 
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+.rent-button {
+    background-color: navy;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 20px;
+    display: inline-block;
+}

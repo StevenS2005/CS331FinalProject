@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Cars</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
+</head>
+
+<body>
+
+    <nav>
+        <div class="nav-links">
+            <a href="/dashboard">Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+
+    <div class="container" style="padding: 50px;">
+        <h1 style="text-align: center; color: white;">Choose Your Ride</h1>
+
+        <div class="car-grid">
+
+            {% for car in cars %}
+            <div class="car-card">
+                <div class="car-image-box">
+                    <h3>{{ car.brand }}</h3>
+                </div>
+
+                <div class="car-info">
+                    <h2>{{ car.brand }} {{ car.model }}</h2>
+                    <p>Year: {{ car.year }}</p>
+                    <p>Type: {{ car.category }}</p>
+                    <p class="status">{{ car.status }}</p>
+
+                    <a href="#" class="rent-button">Rent Now</a>
+                </div>
+            </div>
+            {% endfor %}
+
+        </div>
+    </div>
+
+</body>
+
+</html>

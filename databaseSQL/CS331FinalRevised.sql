@@ -91,3 +91,20 @@ VALUES ('123 Market ST', 'Newark', 'NJ', '07102', '973-555-0101');
 INSERT INTO STAFF_MEMBER (S_FName, S_LName, Role, Salary, BranchID, Password)
 VALUES ('Super', 'Admin', 'Admin', 80000, 1, 'admin123');
 
+
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('ABC-123', 'IS500', 'Lexus', 'Sedan', 2022, 'rented', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('XYZ-987', 'Mustang GT', 'Ford', 'Coupe', 2019, 'rented', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('SUV-555', 'M5', 'BMW', 'Sedan', 2024, 'under maintenance', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('DEF-345', 'Model Y', 'Tesla', 'SUV', 2023, 'rented', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('XWH-643', 'Bronco', 'Ford', 'SUV', 2022, 'rented', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('AGC-574', 'M4 Competition', 'BMW', 'coupe', 2023, 'under maintenance', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('YTE-243', 'Bronco', 'Ford', 'SUV', 2022, 'available', 1);
+INSERT INTO CAR (LicensePlateNumber, Model, Brand, Category, YearOfManufacture, RentalStatus, BranchID)
+ VALUES ('EIO-362', 'Civic', 'Honda', 'Sedan', 2025, 'available', 1);
