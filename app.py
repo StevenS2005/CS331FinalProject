@@ -344,5 +344,12 @@ def RentCar(car_id):
     else:
         return redirect(url_for('Login'))
     
+
+@app.route('/logout')
+def Logout():
+    session.clear()
+    
+    return redirect(url_for('Index'))
+    
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode
