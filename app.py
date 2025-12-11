@@ -22,6 +22,14 @@ mysql.init_app(app)
 def Index():
     return render_template('index.html')
 
+@app.route('/help')
+def Help():
+    return render_template('help.html')
+
+@app.route('/about')
+def About():
+    return render_template('about.html')
+
 @app.route('/login', methods=['GET', 'POST']) #Cutstomer Login page
 def Login():
     error=None
@@ -251,8 +259,30 @@ def AvailableCars():
         
         con = mysql.connect()
         cur = con.cursor()
+
+        search = request.args.get('search', '')
+        selected_status =  request.args.getlist('status')
+
+        query = "SELECT CAR.CarID, CAR.LicensePlateNumber, CAR.Model, CAR.Brand, CAR.Category, CAR.YearOfManufacture, CAR.RentalStatus,RENTAL_BRANCH.City, RENTAL_BRANCH.State, RENTAL_BRANCH.Zip_Code, RENTAL_BRANCH.Street_Address FROM CAR JOIN RENTAL_BRANCH ON CAR.BranchID = RENTAL_BRANCH.BranchID"
+
+        conditions = []
+        parameters = []
+
+        if search:
+            like = f"%{search}%"
+            conditions.append("(CAR.Brand LIKE %s OR CAR.Model LIKE %s OR CAR.Category LIKE %s OR CAR.YearOfManufacture LIKE %s)")
+            parameters.extend([like, like, like, like])
+
+        if selected_status:
+            t = ",".join(["%s"] * len(selected_status))
+            conditions.append(f"CAR.RentalStatus IN ({t})")
+            parameters.extend(selected_status)
+
+        if conditions: 
+            query += " WHERE " + " AND ".join(conditions)
+
+        cur.execute(query, parameters)
         
-        cur.execute("SELECT * FROM car WHERE RentalStatus = 'available'")
         data = cur.fetchall()
         cur.close()
         con.close()
@@ -267,7 +297,8 @@ def AvailableCars():
                 'category': row[4],
                 'year': row[5],
                 'status': row[6],
-            }
+                'location': f" {row[10]}, {row[7]}, {row[8]} {row[9]}"
+                }
 
             cars_list.append(car_dict)
             
@@ -294,7 +325,7 @@ def RentCar(car_id):
             'category': car_data[4]
         }
         
-        daily_rate = 60
+        daily_rate = 100
 
         if request.method == 'POST':
             startDay_String = request.form['startDate']
@@ -311,7 +342,6 @@ def RentCar(car_id):
                 error = "End date must be after start date!"
                 return render_template('rentCar.html',car=car_obj, rate=daily_rate, error=error)           
              
-            daily_rate=100
             total_cost = days * daily_rate
 
             cur.execute("INSERT INTO RENTAL_AGREEMENT(Start_Date, End_Date, DailyRate, TotalCost, CustomerID, CarID) VALUES (%s, %s, %s, %s, %s, %s)", (startDay_String, endDay_String, daily_rate, total_cost, customer_id, car_id))
@@ -331,6 +361,39 @@ def RentCar(car_id):
     else:
         return redirect(url_for('Login'))
     
+
+@app.route('/admin/transactionsList')
+def AdminTransactions():
+    role = session.get('role')
+    if 'Alogged_in' in session and role and role.lower() == 'admin': 
+        
+        con = mysql.connect()
+        cur = con.cursor()
+        
+        cur.execute("SELECT * FROM RENTAL_AGREEMENT")
+        data = cur.fetchall()
+        
+        cur.close()
+        con.close() 
+
+        trans_list = []
+        for row in data:
+            item = {
+                'rental_id': row[0],
+                'start_date': row[1],
+                'end_date': row[2],
+                'rate': row[3],
+                'cost': row[4],
+                'customer_id': row[5], 
+                'car_id': row[6]       
+            }
+            trans_list.append(item)
+
+        return render_template('adminTransactions.html', transactions=trans_list)
+    else:
+        return redirect(url_for('AdminLogin'))
+    
+
 if __name__ == "__main__":
     app.run(debug=True) #runs server in debug mode
 
