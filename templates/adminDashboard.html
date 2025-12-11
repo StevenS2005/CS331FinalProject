@@ -18,13 +18,12 @@
         </div>
     </nav>
 
-    <div class="dashboardMessage">
+    <div class="dashboard-container">
         <h1>Welcome, {{ session['lastName'] }}!</h1>
-    </div>
-
-    <div>
-        <a href="/admin/users" class="dashboard-button">View All Users</a>
-    </div>
+        <div class=" dashboard-button-container">
+            <a href="/admin/users" class="dashboard-button">View All Users</a>
+            <a href="/admin/transcationsList" class="dashboard-button"> View All Transcations</a>
+        </div>
 </body>
 
 </html>

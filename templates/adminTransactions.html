@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Completed Transcations</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"> <!-- links our style.css -->
+
+</head>
+
+<body>
+    <nav>
+        <div class="nav-links">
+            <a href="/adminDashboard">Back to Dashboard</a>
+            <a href="/logout">Logout</a>
+        </div>
+    </nav>
+
+    <div class="table-container">
+        <h1 class="table-title">All Car Rentals</h1>
+
+        <div>
+            <table class="styled-table">
+                <thead>
+                    <tr>
+                        <th>Rental ID</th>
+                        <th>Customer ID</th>
+                        <th>Car ID</th>
+                        <th>Start Date</th>
+                        <th>End Date</th>
+                        <th>Daily Rate</th>
+                        <th>Total Cost</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for trans in transactions %}
+                    <tr>
+                        <td>{{ trans.rental_id }}</td>
+                        <td>{{ trans.customer_id }}</td>
+                        <td>{{ trans.car_id }}</td>
+                        <td>{{ trans.start_date }}</td>
+                        <td>{{ trans.end_date }}</td>
+                        <td>${{ trans.rate }}</td>
+                        <td>${{ trans.cost }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        {% if not transactions %}
+        <p>No reservations found.</p>
+        {% endif %}
+    </div>
+
+</body>
+
+</html>

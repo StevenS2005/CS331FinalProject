@@ -178,7 +178,7 @@ def AdminUsers():
         con = mysql.connect()
         cur = con.cursor()
         
-        cur.execute("SELECT * FROM `customer`")
+        cur.execute("SELECT * FROM customer")
         data = cur.fetchall() 
         
         cur.close()
@@ -206,6 +206,38 @@ def AdminUsers():
         return render_template('adminUsers.html', users=users_list)
     else:
         return redirect(url_for('AdminLogin'))
+    
+@app.route('/admin/transcationsList')
+def AdminTransactions():
+    role = session.get('role')
+    if 'Alogged_in' in session and role and role.lower() == 'admin': 
+        
+        con = mysql.connect()
+        cur = con.cursor()
+        
+        cur.execute("SELECT * FROM RENTAL_AGREEMENT")
+        data = cur.fetchall()
+        
+        cur.close()
+        con.close() 
+
+        trans_list = []
+        for row in data:
+            item = {
+                'rental_id': row[0],
+                'start_date': row[1],
+                'end_date': row[2],
+                'rate': row[3],
+                'cost': row[4],
+                'customer_id': row[5], 
+                'car_id': row[6]       
+            }
+            trans_list.append(item)
+
+        return render_template('adminTransactions.html', transactions=trans_list)
+    else:
+        return redirect(url_for('AdminLogin'))
+
 
 @app.route('/logout')
 def Logout():
