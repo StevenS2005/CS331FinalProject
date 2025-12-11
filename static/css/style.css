@@ -264,7 +264,7 @@ footer {
     margin-bottom: 40px;
 }
 
-.disabled-btn {
+.disabled-button {
     background-color: #57606f; 
     color: #ccc;
     padding: 10px 20px;
@@ -289,7 +289,7 @@ footer {
 .search-container input[type="search"] {
     padding: 10px;
     border-radius: 5px;
-    flex-grow: 1; /* Search bar takes up remaining space */
+    flex-grow: 1; 
 }
 
 .search-container label {

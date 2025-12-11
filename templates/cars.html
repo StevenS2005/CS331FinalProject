@@ -53,10 +53,10 @@
                     <a href="{{ url_for('RentCar', car_id=car.carID) }}" class="rent-button">Rent Now</a>
 
                     {% elif car.status.lower()=='rented' %}
-                    <button class="disabled-btn" disabled>Rented</button>
+                    <button class="disabled-button" disabled>Rented</button>
 
                     {% elif car.status.lower()=='under maintenance' %}
-                    <button class="disabled-btn" disabled>Under Maintenance</button>
+                    <button class="disabled-button" disabled>Under Maintenance</button>
 
                     {% endif %}
                 </div>
