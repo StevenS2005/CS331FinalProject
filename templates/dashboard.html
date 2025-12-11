@@ -20,50 +20,51 @@
         <div class=" dashboard-button-container">
             <a href="/cars" class="dashboard-button">View Cars</a>
             <a href="/payment" class="dashboard-button"> Make Payment</a>
-            <div>
-                <div class="profile-section">
-                    <h2>My Profile</h2>
-                    <div class="profile-card">
-                        <p><strong>Name:</strong> {{ profile.firstName }} {{ profile.lastName }}</p>
-                        <p><strong>Email:</strong> {{ profile.email }}</p>
-                        <p><strong>Phone:</strong> {{ profile.phone }}</p>
-                        <p><strong>Address:</strong> {{ profile.address }}</p>
-                    </div>
-                </div>
+        </div>
 
-                <div class="rental-section">
-                    <h2>My Rental History</h2>
-
-                    <div class="table-container">
-                        {% if rentals %}
-                        <table class="styled-table">
-                            <thead>
-                                <tr>
-                                    <th>Car</th>
-                                    <th>Plate</th>
-                                    <th>Start Date</th>
-                                    <th>End Date</th>
-                                    <th>Total Cost</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for rental in rentals %}
-                                <tr>
-                                    <td>{{ rental.car_name }}</td>
-                                    <td>{{ rental.plate }}</td>
-                                    <td>{{ rental.start }}</td>
-                                    <td>{{ rental.end }}</td>
-                                    <td>${{ rental.cost }}</td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-                    {% else %}
-                    <p>You haven't rented any cars yet.</p>
-                    {% endif %}
-                </div>
+        <div class="profile-section">
+            <h2>My Profile</h2>
+            <div class="profile-card">
+                <p><strong>Name:</strong> {{ profile.firstName }} {{ profile.lastName }}</p>
+                <p><strong>Email:</strong> {{ profile.email }}</p>
+                <p><strong>Phone:</strong> {{ profile.phone }}</p>
+                <p><strong>Address:</strong> {{ profile.address }}</p>
             </div>
+        </div>
+
+        <div class="rental-section">
+            <h2>My Rental History</h2>
+
+            <div class="table-container">
+                {% if rentals %}
+                <table class="styled-table">
+                    <thead>
+                        <tr>
+                            <th>Car</th>
+                            <th>Plate</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Total Cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rental in rentals %}
+                        <tr>
+                            <td>{{ rental.car_name }}</td>
+                            <td>{{ rental.plate }}</td>
+                            <td>{{ rental.start }}</td>
+                            <td>{{ rental.end }}</td>
+                            <td>${{ rental.cost }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% else %}
+            <p>You haven't rented any cars yet.</p>
+            {% endif %}
+        </div>
+    </div>
 
 </body>
 
