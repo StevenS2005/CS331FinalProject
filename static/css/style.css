@@ -406,6 +406,37 @@ footer {
     border-radius: 5px;
 }
 
+.payment-details label {
+    margin-top: 15px;
+    font-weight: bold;
+    display: block; 
+}
+
+.payment-details input {
+    margin-bottom: 5px; 
+    width: 100%; 
+}
+
+.payment-details h3 {
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+    border-bottom: 1px solid goldenrod;
+    padding-bottom: 10px;
+}
+
+.payment-details h4{
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+  
+}
+
+.payment-details button {
+    margin-top: 20px;
+    width: 45%; 
+}
+
 .hidden {
     display: none !important;
 }
